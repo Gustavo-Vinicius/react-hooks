@@ -1,21 +1,38 @@
-import { useState } from 'react'
+import React, {
+    useState,
+    useEffect,
+    useMemo, 
+    useCallback,
+    useRef,
+    useContext,
+    useImperativeHandle,
+    useReducer
+} from 'react'
 
-export const UseState = () => {
+interface IUser {
+    name : string;
+    login : string;
+    avatar_url : string;
 
-    const [ count, setCount] = useState(0)
+}
 
+export const UseState: React.FC = () => {
 
+    const inputRef = useRef<HTMLInputElement>(null)
 
-    const incrementeCount = () => {
-        setCount (prevState => prevState + 1)
+    const [users, setUsers] = useState<[IUser]>()
+
+    const names = useMemo(() => users?.map(user => user.name).join(', ') || '', [users])
+
+    const greeting = useCallback((user: IUser) => alert(`Hello ${user.name}`),[])
+
+    function focusOnInput(){
+        inputRef.current!.focus()
     }
 
     return (
-        <div>
-            <h1>{count}</h1>
-            <button onClick={incrementeCount}>Increment</button>
-
-
-        </div>
+       <form action=''>
+        <input type='text' ref={inputRef}/>
+       </form>
     )
 }

@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react"
 
-export const UseEffect = () => {
+export const UseEffect: React.FC = () => {
 
-    const [ count , setCount ] = useState(0)
+    const [counter, setCounter] = useState(0)
 
     useEffect(() => {
-        setTimeout(() => {
-            setCount((count) => count + 1)
-        }, 1000)
-    })
+        document.title = String(counter)
+
+        //return () => document.title = 'React App';
+
+
+    }, [counter])
 
     return (
-       <h1> I have rendered {count} times ! </h1>
+        <>
+            <h1>{counter}</h1>
+            <button onClick={() => setCounter(counter + 1)}>Adicionar</button>
+        </>
     )
 }
 

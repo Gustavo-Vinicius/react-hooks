@@ -1,12 +1,16 @@
 import { useState } from 'react'
-import { UseEffect, UseReducer, UseRef, UseState } from './reacthooks'
+import { UseEffect } from './reacthooks'
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
+  const [ visible, setVisible ] = useState(true)
 
-  return (
-    <UseReducer/>
-  )
+  setTimeout(() => {
+    setVisible(false)
+  }, 5000)
+
+  return visible && <UseEffect/>
+  
 }
 
 export default App
